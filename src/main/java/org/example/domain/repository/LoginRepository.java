@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface LoginRepository extends JpaRepository<Login, Integer> {
     Optional<Login> findByUserAndPassword(String user, String password);
 
+    Optional<Login> findByUser(String user);
+
     Boolean existsByUser(String user);
 
     Boolean existsByCart(Integer id);

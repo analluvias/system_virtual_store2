@@ -1,3 +1,5 @@
+//http://localhost:8080/swagger-ui/#/ link que funciona
+
 package org.example.config;
 
 import org.springframework.context.annotation.Bean;

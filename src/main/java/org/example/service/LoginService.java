@@ -27,12 +27,12 @@ public class LoginService {
     }
 
 
-    public Login create(Cart cart, String user, String password) {
+    public Login create(Cart cart, String user, String password, Boolean admin) {
 
         if (!loginRepository.existsByUser(user)){
 
             try {
-                Login login = new Login(user, password, cart);
+                Login login = new Login(user, password, cart, admin);
 
                 return loginRepository.save(login);
             }catch (Exception exception){
@@ -85,4 +85,6 @@ public class LoginService {
         }
 
     }
+
+
 }

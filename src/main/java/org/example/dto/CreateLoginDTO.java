@@ -10,4 +10,6 @@ public class CreateLoginDTO {
     private String password;
 
     private Integer cart;
+
+    private Boolean admin = false;
 }
