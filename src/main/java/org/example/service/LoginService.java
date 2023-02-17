@@ -26,6 +26,16 @@ public class LoginService {
         throw new nonExistentIdException("The login searched does not exists.");
     }
 
+    public Login findByUser(String user){
+        Optional<Login> login = loginRepository.findByUser(user);
+
+        if (login.isPresent()){
+            return login.get();
+        }
+
+        throw new nonExistentIdException("The login entered does not exists.");
+    }
+
 
     public Login create(Cart cart, String user, String password, Boolean admin) {
 

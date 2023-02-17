@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+//essa classe tem tudo o que nós poderemos precisar para lidar com o token
 @Service
 public class JwtService {
 

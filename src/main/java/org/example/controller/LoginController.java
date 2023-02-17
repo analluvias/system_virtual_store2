@@ -14,6 +14,9 @@ import org.example.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -44,17 +47,31 @@ public class LoginController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Login> findById (@PathVariable("id") Integer id){
+    public ResponseEntity<Login> findById (@PathVariable("id") Integer id, Authentication authentication){
 
-        Login login = loginService.findById(id);
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+            Login login = loginService.findById(id);
 
-        return new ResponseEntity<Login>(
-                login,
-                HttpStatus.OK
-        );
+            return new ResponseEntity<>(
+                    login,
+                    HttpStatus.OK
+            );
+
+        }
+        else {
+
+            Login login = loginService.findByUser(authentication.getName());
+
+            return new ResponseEntity<>(
+                    login,
+                    HttpStatus.OK
+            );
+
+        }
 
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Login> create(@RequestBody CreateLoginDTO createLoginDTO){
 
@@ -62,9 +79,11 @@ public class LoginController {
 
         Cart cart = cartService.findById(cartId);
 
-        Login login = loginService.create(cart, createLoginDTO.getUser(), createLoginDTO.getPassword(), createLoginDTO.getAdmin());
+        String encodedPassword = passwordEncoder.encode(createLoginDTO.getPassword());
 
-        return new ResponseEntity<Login>(
+        Login login = loginService.create(cart, createLoginDTO.getUser(), encodedPassword, createLoginDTO.getAdmin());
+
+        return new ResponseEntity<>(
                 login,
                 HttpStatus.CREATED
         );

@@ -32,7 +32,7 @@ public class PurchaseItemsController {
 
         PurchaseItems purchaseItem = purchaseItemsService.findById(id);
 
-        return new ResponseEntity<PurchaseItems>(
+        return new ResponseEntity<>(
                 purchaseItem,
                 HttpStatus.OK
         );
@@ -44,7 +44,7 @@ public class PurchaseItemsController {
 
         Product product = productService.findById(purchaseItemsDTO.getProduct());
 
-        return new ResponseEntity<PurchaseItems>(
+        return new ResponseEntity<>(
                 purchaseItemsService.create(product, purchaseItemsDTO.getQuantity()),
                 HttpStatus.CREATED
         );

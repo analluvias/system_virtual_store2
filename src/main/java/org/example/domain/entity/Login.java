@@ -1,5 +1,6 @@
 package org.example.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Login {
     @Column(name = "user", unique = true)
     private String user;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 

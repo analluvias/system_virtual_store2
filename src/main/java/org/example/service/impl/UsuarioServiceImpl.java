@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+//essa classe lida com o banco de dados do login e compara se está tudo correto
+// de acordo com o que entramos ao tentar acessar o sistema.
 @Service
 public class UsuarioServiceImpl implements UserDetailsService{
 

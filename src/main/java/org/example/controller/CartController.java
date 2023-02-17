@@ -8,7 +8,6 @@ import org.example.dto.PurchasesCartDTO;
 import org.example.dto.StatusCartDTO;
 import org.example.event.CloseStatusCartEvent;
 import org.example.service.CartService;
-//import org.example.service.OrderService;
 import org.example.service.PurchaseItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
